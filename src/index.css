@@ -1,0 +1,568 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+  background-color: #f8f9fa;
+  color: #212529;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* CRITICAL: Prevent horizontal overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #f8f9fa;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dee2e6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7FD689;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6EE7B7;
+}
+
+/* Interactive gradient background - Enhanced visibility with performance optimizations */
+.interactive-gradient-bg {
+  transition: background 0.2s ease-out;
+  will-change: background;
+  opacity: 1;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Grid Background Patterns - PERFECTLY CENTERED with container-based alignment */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(173, 181, 189, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 181, 189, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  /* Center the grid relative to the container */
+  background-position: 
+    calc(50% - 20px) 0,
+    calc(50% - 20px) 0;
+  position: relative;
+}
+
+.grid-bg-large {
+  background-image: 
+    linear-gradient(rgba(173, 181, 189, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 181, 189, 0.12) 1px, transparent 1px);
+  background-size: 80px 80px;
+  /* Center the grid relative to the container */
+  background-position: 
+    calc(50% - 40px) 0,
+    calc(50% - 40px) 0;
+  position: relative;
+}
+
+.grid-bg-dense {
+  background-image: 
+    linear-gradient(rgba(173, 181, 189, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 181, 189, 0.18) 1px, transparent 1px);
+  background-size: 20px 20px;
+  /* Center the grid relative to the container */
+  background-position: 
+    calc(50% - 10px) 0,
+    calc(50% - 10px) 0;
+  position: relative;
+}
+
+.graph-web-bg {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(127, 214, 137, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(127, 214, 137, 0.03) 0%, transparent 50%),
+    linear-gradient(rgba(173, 181, 189, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 181, 189, 0.1) 1px, transparent 1px);
+  background-size: 200px 200px, 300px 300px, 60px 60px, 60px 60px;
+  /* Center all patterns relative to the container */
+  background-position: 
+    calc(50% - 100px) calc(50% - 100px),
+    calc(50% - 150px) calc(50% - 150px),
+    calc(50% - 30px) 0,
+    calc(50% - 30px) 0;
+  position: relative;
+}
+
+/* Alternative grid approach for perfect centering */
+.grid-bg-centered {
+  position: relative;
+}
+
+.grid-bg-centered::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-image: 
+    linear-gradient(rgba(173, 181, 189, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 181, 189, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Scroll Animations with performance optimizations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-up.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-left.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-right.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.scale-in.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered animation delays */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* Workflow step animations with sequential delays */
+.workflow-step-1 { transition-delay: 0.1s; }
+.workflow-step-2 { transition-delay: 0.25s; }
+.workflow-step-3 { transition-delay: 0.4s; }
+.workflow-step-4 { transition-delay: 0.55s; }
+.workflow-step-5 { transition-delay: 0.7s; }
+.workflow-step-6 { transition-delay: 0.85s; }
+
+/* Chart intro animations - slower and more noticeable */
+.chart-animate-in {
+  animation: chartSlideIn 2s ease-out forwards;
+}
+
+.performance-chart .chart-animate-in {
+  animation: performanceChartGrow 3s ease-out forwards;
+}
+
+@keyframes chartSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes performanceChartGrow {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(30px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Chart customizations */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #adb5bd;
+  stroke-width: 1;
+}
+
+.recharts-text {
+  fill: #6c757d;
+  font-size: 12px;
+}
+
+/* Button hover effects with performance optimizations */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(127, 214, 137, 0.2);
+}
+
+/* Smooth scroll offset for fixed header */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* MOBILE MENU ANIMATION - Smooth slide down effect */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* CRITICAL: Mobile header fixes - PERFECT LOGO AND HAMBURGER POSITIONING */
+@media (max-width: 768px) {
+  /* Ensure header never overflows */
+  header {
+    width: 100vw;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  
+  /* Header container with INCREASED padding */
+  header > div {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding-left: 1.5rem !important; /* Increased from 1rem to 1.5rem */
+    padding-right: 1.5rem !important; /* Increased from 1rem to 1.5rem */
+  }
+  
+  /* Header content with flex constraints - CRITICAL: Proper spacing */
+  header .flex {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    gap: 1rem; /* Ensure space between logo and hamburger */
+  }
+  
+  /* LOGO: Tighter spacing between icon and text */
+  header .flex-shrink-0:first-child {
+    flex-shrink: 0;
+    min-width: 0;
+    max-width: calc(100% - 60px); /* Reserve space for hamburger + margin */
+    gap: 0.375rem !important; /* space-x-1.5 = 6px */
+  }
+  
+  /* Logo icon - maintain exact square size like desktop */
+  header .flex-shrink-0:first-child > div {
+    width: 32px !important; /* w-8 = 32px */
+    height: 32px !important; /* h-8 = 32px */
+    flex-shrink: 0;
+    border-radius: 8px; /* rounded-lg */
+  }
+  
+  /* Logo text - EXACT same as desktop */
+  header .flex-shrink-0:first-child span {
+    font-size: 1.25rem !important; /* text-xl */
+    line-height: 1.75rem !important;
+    font-weight: 700 !important; /* font-bold */
+    white-space: nowrap !important;
+  }
+  
+  /* MOBILE MENU BUTTON: Perfect positioning and branded green focus */
+  header button[aria-label*="menu"] {
+    /* Exact square button for perfect centering */
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important; /* rounded-md */
+    position: relative !important;
+    flex-shrink: 0 !important;
+    margin-left: 1rem !important; /* ml-4 = 16px */
+    margin-right: 0 !important;
+  }
+  
+  /* BRANDED GREEN: Perfect focus ring centering */
+  header button[aria-label*="menu"]:focus {
+    background-color: rgba(127, 214, 137, 0.2) !important;
+    outline: none !important;
+    box-shadow: 
+      0 0 0 2px #7FD689 !important,
+      0 0 0 4px rgba(127, 214, 137, 0.2) !important;
+  }
+  
+  header button[aria-label*="menu"]:active {
+    background-color: rgba(127, 214, 137, 0.3) !important;
+    transform: scale(0.95) !important;
+  }
+  
+  /* Menu icon centering */
+  header button[aria-label*="menu"] svg {
+    width: 24px !important;
+    height: 24px !important;
+    margin: 0 !important;
+  }
+}
+
+/* Ensure all sections respect viewport width and have proper grid alignment */
+section {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  /* Ensure grid patterns align properly across sections */
+  background-attachment: local;
+}
+
+/* Container max-width constraints */
+.container {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* FIXED: Ensure charts don't overflow and are properly centered */
+.recharts-wrapper {
+  max-width: 100% !important;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Ensure ResponsiveContainer works properly */
+.recharts-responsive-container {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+/* CRITICAL: Chart container overflow fixes */
+.recharts-surface {
+  overflow: visible !important;
+}
+
+/* Ensure chart containers are properly constrained */
+[data-recharts] {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Ensure header works across all browsers */
+@supports (-webkit-backdrop-filter: blur(12px)) {
+  .header-backdrop {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@supports not (-webkit-backdrop-filter: blur(12px)) {
+  .header-backdrop {
+    background-color: rgba(248, 249, 250, 0.98);
+  }
+}
+
+/* BRANDED GREEN: Override any default button focus colors globally */
+button:focus,
+button:focus-visible {
+  outline-color: #7FD689 !important;
+}
+
+/* Mobile-specific button styling for branded green */
+@media (max-width: 768px) {
+  button:focus {
+    outline: 2px solid #7FD689 !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(127, 214, 137, 0.2) !important;
+  }
+  
+  button:active {
+    background-color: rgba(127, 214, 137, 0.1) !important;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .interactive-gradient-bg {
+    transition: none;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 0 0% 13%;
+    --card: 0 0% 91%;
+    --card-foreground: 0 0% 13%;
+    --popover: 0 0% 91%;
+    --popover-foreground: 0 0% 13%;
+    --primary: 142 40% 60%;
+    --primary-foreground: 0 0% 13%;
+    --secondary: 0 0% 87%;
+    --secondary-foreground: 0 0% 13%;
+    --muted: 0 0% 87%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 87%;
+    --accent-foreground: 0 0% 13%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 81%;
+    --input: 0 0% 81%;
+    --ring: 142 40% 60%;
+    --chart-1: 142 40% 60%;
+    --chart-2: 142 40% 70%;
+    --chart-3: 142 40% 80%;
+    --chart-4: 142 40% 90%;
+    --chart-5: 142 40% 95%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom emerald color palette */
+@layer utilities {
+  .text-emerald-400 {
+    color: #7FD689;
+  }
+  .text-emerald-500 {
+    color: #6EE7B7;
+  }
+  .bg-emerald-400 {
+    background-color: #7FD689;
+  }
+  .bg-emerald-500 {
+    background-color: #6EE7B7;
+  }
+  .bg-emerald-600 {
+    background-color: #5EEAD4;
+  }
+  .border-emerald-400 {
+    border-color: #7FD689;
+  }
+  .border-emerald-500 {
+    border-color: #6EE7B7;
+  }
+  .hover\:bg-emerald-500:hover {
+    background-color: #6EE7B7;
+  }
+  .hover\:text-emerald-300:hover {
+    color: #A7F3D0;
+  }
+}
